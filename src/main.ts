@@ -32,6 +32,9 @@ class Game {
     const saved = localStorage.getItem('tetris-best-score');
     this.bestScore = saved ? parseInt(saved, 10) : 0;
     this.init();
+    // Show best score on start screen
+    const startBest = document.getElementById('start-best-score');
+    if (startBest) startBest.textContent = this.bestScore.toLocaleString();
   }
 
   private init() {
@@ -238,6 +241,12 @@ class Game {
   private updateStats() {
     document.getElementById('score-val')!.textContent = this.score.toLocaleString();
     document.getElementById('level-val')!.textContent = this.level.toString();
+    // Live-update best score during gameplay
+    if (this.score > this.bestScore) {
+      this.bestScore = this.score;
+      localStorage.setItem('tetris-best-score', this.bestScore.toString());
+    }
+    document.getElementById('best-score-val')!.textContent = this.bestScore.toLocaleString();
     this.drawPreview('next-preview', this.nextPiece);
     this.drawPreview('hold-preview', this.holdPiece);
   }
@@ -355,7 +364,7 @@ class Game {
       this.ctx.lineTo(width, y * blockSize);
       this.ctx.stroke();
     }
-
+    // Bu alan 
     // Locked
     this.grid.forEach((row, y) => {
       const isClearing = this.clearingLines.includes(y);
@@ -426,6 +435,9 @@ class Game {
     document.getElementById('game-over-overlay')?.classList.add('active');
     document.getElementById('final-score')!.textContent = this.score.toLocaleString();
     document.getElementById('best-score')!.textContent = this.bestScore.toLocaleString();
+    // Update start screen best score for next visit
+    const startBest = document.getElementById('start-best-score');
+    if (startBest) startBest.textContent = this.bestScore.toLocaleString();
   }
 
   private setupControls() {
