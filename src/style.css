@@ -93,25 +93,56 @@ body {
   text-shadow: 0 0 10px currentColor;
 }
 
+.audio-toggles {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.audio-btn {
+  cursor: pointer;
+  padding: 0.5rem 0.75rem !important;
+  transition: all 0.15s;
+  border-radius: 12px !important;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.audio-btn:active {
+  transform: scale(0.9);
+}
+
+.audio-btn.muted {
+  opacity: 0.4;
+}
+
+.audio-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  color: white;
+}
+
 .canvas-wrapper {
   position: relative;
-  padding: 4px;
-  background: var(--glass-bg);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 0;
+  width: 100%;
   min-height: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 canvas {
   display: block;
-  border-radius: 8px;
-  background: transparent;
+  background: var(--glass-bg);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
 }
 
 .overlay {
@@ -254,12 +285,12 @@ canvas {
 
 @keyframes line-explode {
   0% { transform: scale(1); filter: brightness(1); opacity: 1; }
-  50% { transform: scale(1.1); filter: brightness(3); opacity: 0.8; }
-  100% { transform: scale(1.2); filter: brightness(5); opacity: 0; }
+  50% { transform: scale(1.02); filter: brightness(1.5); opacity: 0.9; }
+  100% { transform: scale(1); filter: brightness(1); opacity: 1; }
 }
 
 .line-clear-flash {
-  animation: line-explode 0.4s ease-out forwards;
+  animation: line-explode 0.3s ease-out;
 }
 
 /* RESPONSIVE DESIGN - Tablet (768px and below) */
@@ -398,9 +429,9 @@ canvas {
   }
 
   .canvas-wrapper {
-    padding: 2px;
+    padding: 0;
     width: 100%;
-    min-width: 0;
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
